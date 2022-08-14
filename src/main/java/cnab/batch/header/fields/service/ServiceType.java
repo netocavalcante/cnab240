@@ -1,15 +1,15 @@
-package cnab.batch.header.fields.servico;
+package cnab.batch.header.fields.service;
 
 import cnab.commonsfileds.base.GenericBasicField;
 
-public class SenderType extends GenericBasicField<Long> {
+public class ServiceType extends GenericBasicField<Long> {
     private static final int FIELD_SIZE_V10_9 = 2;
 
-    public SenderType(Long field, int size) {
+    public ServiceType(Long field, int size) {
         super(field, size);
     }
 
-    public SenderType(Long field) {
+    public ServiceType(Long field) {
         super(field, FIELD_SIZE_V10_9);
     }
 }

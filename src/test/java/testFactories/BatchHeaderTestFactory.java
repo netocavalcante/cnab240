@@ -2,7 +2,7 @@ package testFactories;
 
 import cnab.batch.header.BatchHeader;
 import cnab.batch.header.fields.companyaddress.CompanyAdress;
-import cnab.batch.header.fields.servico.BatchHeaderService;
+import cnab.batch.header.fields.service.BatchHeaderService;
 import cnab.commonsfileds.Name;
 import cnab.commonsfileds.account.*;
 import cnab.commonsfileds.company.AgreementNumber;

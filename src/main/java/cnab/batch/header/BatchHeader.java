@@ -2,7 +2,7 @@ package cnab.batch.header;
 
 import cnab.batch.header.fields.*;
 import cnab.batch.header.fields.companyaddress.CompanyAdress;
-import cnab.batch.header.fields.servico.BatchHeaderService;
+import cnab.batch.header.fields.service.BatchHeaderService;
 import cnab.commonsfileds.Occurrence;
 import cnab.commonsfileds.company.Company;
 import cnab.commonsfileds.control.BankCode;

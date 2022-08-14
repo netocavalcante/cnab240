@@ -1,4 +1,4 @@
-package cnab.batch.header.fields.servico;
+package cnab.batch.header.fields.service;
 
 import cnab.utils.Util;
 
