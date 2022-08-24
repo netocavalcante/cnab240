@@ -2,11 +2,11 @@ package cnab.commonsfileds.base;
 
 import static cnab.utils.Util.formatFieldToBePrinted;
 
-public class GenericBasicField<T> {
+public abstract class GenericBasicField<T> {
     private final T field;
     private final int fieldSize;
 
-    public GenericBasicField(T field, int size) {
+    protected GenericBasicField(T field, int size) {
         this.field = field;
         this.fieldSize = size;
     }

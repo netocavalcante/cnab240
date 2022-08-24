@@ -16,36 +16,36 @@ import cnab.utils.validator.CNABConstraintValidator;
 
 public class BatchHeader {
     private final Control control;
-    private final BatchHeaderService service;
     private final Company company;
-    private final Information information;
-    private final CompanyAdress companyAdress;
+    private final Occurrence occurrences;
     private final PaymentType paymentType;
+    private final Information information;
+    private final BatchHeaderService service;
+    private final CompanyAdress companyAdress;
     private final CnabRestrictedUse firstCnabRestrictedUse;
     private final CnabRestrictedUse secondCnabRestrictedUse;
-    private final Occurrence occurrences;
 
     public BatchHeader(BatchHeaderBuilder batchHeaderBuilder) {
         this.control = batchHeaderBuilder.control;
         this.service = batchHeaderBuilder.service;
         this.company = batchHeaderBuilder.company;
+        this.occurrences = batchHeaderBuilder.occurrences;
         this.information = batchHeaderBuilder.information;
-        this.companyAdress = batchHeaderBuilder.companyAdress;
         this.paymentType = batchHeaderBuilder.paymentType;
+        this.companyAdress = batchHeaderBuilder.companyAdress;
         this.firstCnabRestrictedUse = batchHeaderBuilder.firstCnabRestrictedUse;
         this.secondCnabRestrictedUse = batchHeaderBuilder.secondCnabRestrictedUse;
-        this.occurrences = batchHeaderBuilder.occurrences;
     }
 
     public static BatchHeader createSinglePaymentBatchHeader(BankCode bankCode, BatchHeaderService service, Company company,
                                                              String informationValue, CompanyAdress companyAdress,
                                                              String occurrencesValue) throws ContentMoreThan240CharactersException {
-        Control control = Control.createTedSinglePayment(bankCode, new RecordType(1L));
+        PaymentType paymentType = new PaymentType(0L);
+        Occurrence occurrences = new Occurrence(occurrencesValue);
+        Information information = new Information(informationValue);
         CnabRestrictedUse firstCnabRestrictedUse = new CnabRestrictedUse(1);
         CnabRestrictedUse secondCnabRestrictedUse = new CnabRestrictedUse(6);
-        Information information = new Information(informationValue);
-        Occurrence occurrences = new Occurrence(occurrencesValue);
-        PaymentType paymentType = new PaymentType(0L);
+        Control control = Control.createTedSinglePayment(bankCode, new RecordType(1L));
 
         return new BatchHeaderBuilder()
                 .setControl(control)
@@ -83,14 +83,14 @@ public class BatchHeader {
 
     public static final class BatchHeaderBuilder {
         private Control control;
-        private BatchHeaderService service;
         private Company company;
+        private Occurrence occurrences;
         private Information information;
-        private CompanyAdress companyAdress;
         private PaymentType paymentType;
+        private BatchHeaderService service;
+        private CompanyAdress companyAdress;
         private CnabRestrictedUse firstCnabRestrictedUse;
         private CnabRestrictedUse secondCnabRestrictedUse;
-        private Occurrence occurrences;
 
         public BatchHeaderBuilder(Control control, BatchHeaderService service, Company company, Information information,
                                   CompanyAdress companyAdress, PaymentType paymentType,
@@ -100,11 +100,11 @@ public class BatchHeader {
             this.service = service;
             this.company = company;
             this.information = information;
-            this.companyAdress = companyAdress;
+            this.occurrences = occurrences;
             this.paymentType = paymentType;
+            this.companyAdress = companyAdress;
             this.firstCnabRestrictedUse = firstCnabRestrictedUse;
             this.secondCnabRestrictedUse = secondCnabRestrictedUse;
-            this.occurrences = occurrences;
         }
 
         public BatchHeaderBuilder() {

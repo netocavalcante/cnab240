@@ -6,16 +6,16 @@ import cnab.commonsfileds.company.taxid.Registration;
 import cnab.utils.Util;
 
 public class Company {
+    private final Name name;
+    private final Account account;
     private final Registration taxID;
     private final AgreementNumber agreementNumber;
-    private final Account account;
-    private final Name name;
 
     public Company(CompanyBuilder companyBuilder) {
+        this.name = companyBuilder.name;
+        this.account = companyBuilder.account;
         this.taxID = companyBuilder.registration;
         this.agreementNumber = companyBuilder.agreementNumber;
-        this.account = companyBuilder.account;
-        this.name = companyBuilder.name;
     }
 
     @Override
@@ -27,19 +27,19 @@ public class Company {
     }
 
     public static final class CompanyBuilder {
+        private Name name;
+        private Account account;
         private Registration registration;
         private AgreementNumber agreementNumber;
-        private Account account;
-        private Name name;
 
         public CompanyBuilder() {
         }
 
         public CompanyBuilder(Registration taxID, AgreementNumber agreementNumber, Account account, Name name) {
+            this.name = name;
+            this.account = account;
             this.registration = taxID;
             this.agreementNumber = agreementNumber;
-            this.account = account;
-            this.name = name;
         }
 
         public CompanyBuilder setRegistration(Registration registration) {

@@ -15,15 +15,15 @@ import java.util.Collection;
 import java.util.Set;
 
 public final class FileTrailer {
+    private final Total total;
     private final Control control;
     private final CnabRestrictedUse cnabRestrictedUse;
     private final CnabRestrictedUse secondCnabRestrictedUse;
-    private final Total total;
 
     public FileTrailer(Set<Batch> batchs, BankCode bankCode) {
 
-        this.control= Control.createDefaultFileTrailer(bankCode);
         this.cnabRestrictedUse = new CnabRestrictedUse(9);
+        this.control = Control.createDefaultFileTrailer(bankCode);
         this.secondCnabRestrictedUse = new CnabRestrictedUse(205);
 
         Long totalOfBatches = (long) batchs.size();

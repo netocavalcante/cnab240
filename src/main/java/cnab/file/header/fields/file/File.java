@@ -7,28 +7,28 @@ import java.time.LocalTime;
 
 public class File {
     private final Code code;
-    private final GenerationDate generationDate;
-    private final GenerationTime generationTime;
-    private final Sequence sequence;
     private final Layout layout;
     private final Density density;
+    private final Sequence sequence;
+    private final GenerationDate generationDate;
+    private final GenerationTime generationTime;
 
     public File(FileBuilder fileBuilder) {
         this.code = fileBuilder.code;
-        this.generationDate = fileBuilder.generationDate;
-        this.generationTime = fileBuilder.generationTime;
-        this.sequence = fileBuilder.sequence;
         this.layout = fileBuilder.layout;
         this.density = fileBuilder.density;
+        this.sequence = fileBuilder.sequence;
+        this.generationDate = fileBuilder.generationDate;
+        this.generationTime = fileBuilder.generationTime;
     }
 
     public static File createDefaultSinglePaymentFile(){
         Code code = new Code(1L);
-        GenerationDate generationDate = new GenerationDate(LocalDate.now());
-        GenerationTime generationTime = new GenerationTime(LocalTime.now());
-        Sequence sequence = new Sequence(1L);
         Layout layout = new Layout("103");
+        Sequence sequence = new Sequence(1L);
         Density density = new Density(1650L);
+        GenerationTime generationTime = new GenerationTime(LocalTime.now());
+        GenerationDate generationDate = new GenerationDate(LocalDate.now());
         return new FileBuilder(code,generationDate,generationTime,sequence,layout,density).build();
     }
 
@@ -44,11 +44,11 @@ public class File {
 
     public static final class FileBuilder {
         private Code code;
-        private GenerationDate generationDate;
-        private GenerationTime generationTime;
-        private Sequence sequence;
         private Layout layout;
         private Density density;
+        private Sequence sequence;
+        private GenerationDate generationDate;
+        private GenerationTime generationTime;
 
         public FileBuilder() {
         }
@@ -56,11 +56,11 @@ public class File {
         public FileBuilder(Code code, GenerationDate generationDate, GenerationTime generationTime, Sequence sequence,
                            Layout layout, Density density) {
             this.code = code;
-            this.generationDate = generationDate;
-            this.generationTime = generationTime;
-            this.sequence = sequence;
             this.layout = layout;
             this.density = density;
+            this.sequence = sequence;
+            this.generationDate = generationDate;
+            this.generationTime = generationTime;
         }
 
         public FileBuilder setCode(Code code) {

@@ -3,8 +3,8 @@ package cnab.file.trailer.total;
 import cnab.utils.Util;
 
 public class Total {
-    private final TotalOfRecords totalOfRecords;
     private final TotalOfBatchs totalOfBatchs;
+    private final TotalOfRecords totalOfRecords;
     private final TotalOfAcoountsPerBatch totalOfAcoountsPerBatch;
 
     public Total(TotalBuilder totalBuilder) {
@@ -21,13 +21,13 @@ public class Total {
     }
 
     public static final class TotalBuilder {
-        private TotalOfRecords totalOfRecords;
         private TotalOfBatchs totalOfBatchs;
+        private TotalOfRecords totalOfRecords;
         private TotalOfAcoountsPerBatch totalOfAcoountsPerBatch;
 
         public TotalBuilder(TotalOfRecords totalOfRecords, TotalOfBatchs totalOfBatchs, TotalOfAcoountsPerBatch totalOfAcoountsPerBatch) {
-            this.totalOfRecords = totalOfRecords;
             this.totalOfBatchs = totalOfBatchs;
+            this.totalOfRecords = totalOfRecords;
             this.totalOfAcoountsPerBatch = totalOfAcoountsPerBatch;
         }
 

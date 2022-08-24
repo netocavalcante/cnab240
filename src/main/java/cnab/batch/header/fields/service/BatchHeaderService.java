@@ -4,22 +4,22 @@ import cnab.utils.Util;
 
 public final class BatchHeaderService {
     private final Operation operation;
+    private final SenderType senderType;
     private final ServiceType serviceType;
     private final LayoutVersion layoutVersion;
-    private final SenderType senderType;
 
     public BatchHeaderService(BatchHeaderServiceBuilder serviceBuilder) {
         this.operation = serviceBuilder.operation;
+        this.senderType = serviceBuilder.senderType;
         this.serviceType = serviceBuilder.serviceType;
         this.layoutVersion = serviceBuilder.layoutVersion;
-        this.senderType = serviceBuilder.senderType;
     }
 
     public static BatchHeaderService createDefaultBathHeaderService(Long serviceTypeValue, Long senderTypeValue) {
         Operation operation = new Operation("C");
-        ServiceType serviceType = new ServiceType(serviceTypeValue);
-        LayoutVersion layoutVersion = new LayoutVersion(46L);
         SenderType senderType = new SenderType(senderTypeValue);
+        LayoutVersion layoutVersion = new LayoutVersion(46L);
+        ServiceType serviceType = new ServiceType(serviceTypeValue);
         return new BatchHeaderServiceBuilder(operation, serviceType, layoutVersion, senderType).build();
     }
 
@@ -33,16 +33,16 @@ public final class BatchHeaderService {
 
     public static final class BatchHeaderServiceBuilder {
         private Operation operation;
+        private SenderType senderType;
         private ServiceType serviceType;
         private LayoutVersion layoutVersion;
-        private SenderType senderType;
 
         public BatchHeaderServiceBuilder(Operation operation, ServiceType serviceType,
                                          LayoutVersion layoutVersion, SenderType senderType) {
             this.operation = operation;
+            this.senderType = senderType;
             this.serviceType = serviceType;
             this.layoutVersion = layoutVersion;
-            this.senderType = senderType;
         }
 
         public BatchHeaderServiceBuilder setOperation(Operation operation) {

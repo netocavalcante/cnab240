@@ -15,39 +15,41 @@ import cnab.utils.validator.CNABConstraintValidator;
 import static cnab.file.header.fields.file.File.createDefaultSinglePaymentFile;
 
 public final class FileHeader {
-    private final Control control;
-    private final CnabRestrictedUse firstCnabRestricUse;
-    private final CnabRestrictedUse secondCnabRestricUse;
-    private final CnabRestrictedUse thirdCnabRestricUse;
-    private final Company organization;
-    private final BankName bankName;
     private final File fileData;
+    private final Control control;
+    private final BankName bankName;
+    private final Company organization;
     private final BankSpecificUse bankPurpose;
+    private final CnabRestrictedUse firstCnabRestricUse;
+    private final CnabRestrictedUse thirdCnabRestricUse;
+    private final CnabRestrictedUse secondCnabRestricUse;
     private final CompanySpecificUse organizationPurpose;
 
     private FileHeader(FileHeaderBuilder fileHeaderBuilder) {
         this.control = fileHeaderBuilder.control;
-        this.firstCnabRestricUse = fileHeaderBuilder.firstCnabRestricUse;
-        this.secondCnabRestricUse = fileHeaderBuilder.secondCnabRestricUse;
-        this.thirdCnabRestricUse = fileHeaderBuilder.thirdCnabRestricUse;
-        this.organization = fileHeaderBuilder.organization;
         this.bankName = fileHeaderBuilder.bankName;
         this.fileData = fileHeaderBuilder.fileData;
         this.bankPurpose = fileHeaderBuilder.bankPurpose;
+        this.organization = fileHeaderBuilder.organization;
+        this.firstCnabRestricUse = fileHeaderBuilder.firstCnabRestricUse;
+        this.thirdCnabRestricUse = fileHeaderBuilder.thirdCnabRestricUse;
         this.organizationPurpose = fileHeaderBuilder.organizationPurpose;
+        this.secondCnabRestricUse = fileHeaderBuilder.secondCnabRestricUse;
     }
 
     public static FileHeader createDefaultFileHeader(long bankCode, String bankNameDescription, Company company) throws ContentMoreThan240CharactersException {
-        Control defaultFileHeaderControl = Control.createDefaultFileHeader(new BankCode(bankCode));
-        BankName bankName = new BankName(bankNameDescription);
-        CnabRestrictedUse firstRestrictedUse = new CnabRestrictedUse(9);
-        CnabRestrictedUse secondCnabRestricUse = new CnabRestrictedUse(10);
-        CnabRestrictedUse thirdCnabRestricUse = new CnabRestrictedUse(29);
+
         File file = createDefaultSinglePaymentFile();
+        BankName bankName = new BankName(bankNameDescription);
         BankSpecificUse bankSpecificUse = new BankSpecificUse("");
+        CnabRestrictedUse firstRestrictedUse = new CnabRestrictedUse(9);
+        CnabRestrictedUse thirdCnabRestricUse = new CnabRestrictedUse(29);
+        CnabRestrictedUse secondCnabRestricUse = new CnabRestrictedUse(10);
         CompanySpecificUse companySpecificUse = new CompanySpecificUse("");
-        return new FileHeader.FileHeaderBuilder(defaultFileHeaderControl,firstRestrictedUse, secondCnabRestricUse, thirdCnabRestricUse,
-                company, bankName, file,bankSpecificUse,companySpecificUse).build();
+        Control defaultFileHeaderControl = Control.createDefaultFileHeader(new BankCode(bankCode));
+
+        return new FileHeader.FileHeaderBuilder(defaultFileHeaderControl,firstRestrictedUse, secondCnabRestricUse,
+                thirdCnabRestricUse, company, bankName, file,bankSpecificUse,companySpecificUse).build();
     }
 
     public BankCode getBankCode() {
@@ -68,14 +70,14 @@ public final class FileHeader {
     }
 
     public static final class FileHeaderBuilder {
-        private  Control control;
-        private  CnabRestrictedUse firstCnabRestricUse;
-        private  CnabRestrictedUse secondCnabRestricUse;
-        private  CnabRestrictedUse thirdCnabRestricUse;
-        private  Company organization;
-        private  BankName bankName;
         private  File fileData;
+        private  Control control;
+        private  BankName bankName;
+        private  Company organization;
         private  BankSpecificUse bankPurpose;
+        private  CnabRestrictedUse firstCnabRestricUse;
+        private  CnabRestrictedUse thirdCnabRestricUse;
+        private  CnabRestrictedUse secondCnabRestricUse;
         private  CompanySpecificUse organizationPurpose;
 
         public FileHeaderBuilder() {
@@ -86,14 +88,14 @@ public final class FileHeader {
                                  Company organization, BankName bankName, File fileData, BankSpecificUse bankPurpose,
                                  CompanySpecificUse organizationPurpose) {
             this.control = control;
-            this.firstCnabRestricUse = firstCnabRestricUse;
-            this.secondCnabRestricUse = secondCnabRestricUse;
-            this.thirdCnabRestricUse = thirdCnabRestricUse;
-            this.organization = organization;
-            this.bankName = bankName;
             this.fileData = fileData;
+            this.bankName = bankName;
             this.bankPurpose = bankPurpose;
+            this.organization = organization;
+            this.thirdCnabRestricUse = thirdCnabRestricUse;
+            this.firstCnabRestricUse = firstCnabRestricUse;
             this.organizationPurpose = organizationPurpose;
+            this.secondCnabRestricUse = secondCnabRestricUse;
         }
 
         public FileHeaderBuilder setControl(Control control) {

@@ -12,13 +12,13 @@ public final class CompanyAdress {
     private final CepAddicionalInfo cepAddicionalInfo;
 
     public CompanyAdress(CompanyAddresBuilder companyAddresBuilder) {
-        this.state = companyAddresBuilder.state;
+        this.cep = companyAddresBuilder.cep;
         this.city = companyAddresBuilder.city;
-        this.addressNumber = companyAddresBuilder.addressNumber;
+        this.state = companyAddresBuilder.state;
         this.street = companyAddresBuilder.street;
+        this.addressNumber = companyAddresBuilder.addressNumber;
         this.addicionalInfo = companyAddresBuilder.addicionalInfo;
         this.cepAddicionalInfo = companyAddresBuilder.cepAddicionalInfo;
-        this.cep = companyAddresBuilder.cep;
     }
 
     public static CompanyAdress createDefaultCompanyAddressAsBlank(){
@@ -46,25 +46,25 @@ public final class CompanyAdress {
     }
 
     public static final class CompanyAddresBuilder {
-        private State state;
+        private Cep cep;
         private City city;
-        private AddressNumber addressNumber;
+        private State state;
         private Street street;
+        private AddressNumber addressNumber;
         private AddicionalInfo addicionalInfo;
         private CepAddicionalInfo cepAddicionalInfo;
-        private Cep cep;
 
         public CompanyAddresBuilder() {
         }
 
         public CompanyAddresBuilder(State state, City city, AddressNumber number, Street street, AddicionalInfo addicionalInfo, CepAddicionalInfo cepAddicionalInfo, Cep cep) {
-            this.state = state;
+            this.cep = cep;
             this.city = city;
-            this.addressNumber = number;
+            this.state = state;
             this.street = street;
+            this.addressNumber = number;
             this.addicionalInfo = addicionalInfo;
             this.cepAddicionalInfo = cepAddicionalInfo;
-            this.cep = cep;
         }
 
         public CompanyAddresBuilder setState(State state) {

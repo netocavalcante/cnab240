@@ -4,13 +4,13 @@ import cnab.utils.Util;
 
 public final class Control {
     private final BankCode bankCode;
-    private final ControlNumber controlNumber;
     private final RecordType registerType;
+    private final ControlNumber controlNumber;
 
     public Control(ControlBuilder controlBuilder) {
         this.bankCode = controlBuilder.bankCode;
-        this.controlNumber = controlBuilder.controlNumber;
         this.registerType = controlBuilder.registerType;
+        this.controlNumber = controlBuilder.controlNumber;
     }
 
     public static Control createDefaultFileHeader(BankCode bankCode) {
@@ -50,13 +50,13 @@ public final class Control {
 
     public static final class ControlBuilder {
         private BankCode bankCode;
-        private ControlNumber controlNumber;
         private RecordType registerType;
+        private ControlNumber controlNumber;
 
         public ControlBuilder(BankCode bankCode, ControlNumber controlNumber, RecordType registerType) {
             this.bankCode = bankCode;
-            this.controlNumber = controlNumber;
             this.registerType = registerType;
+            this.controlNumber = controlNumber;
         }
 
         public ControlBuilder setBankCode(BankCode bankCode) {

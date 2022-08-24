@@ -49,9 +49,10 @@ public final class ASegment implements Segment {
                                                   Payment payment, Information2 information2, DocPurpose docPurpose,
                                                   TedPurpose tedPurpose, Purpose purpose, Notice notice,
                                                   Occurrence occurrence) throws ContentMoreThan240CharactersException {
-        Control control = Control.createTedSinglePayment(bankCode, new RecordType(3L));
-        Aservice aservice = new Aservice(new RegistrationNumber(1L), transaction);
+
         CnabRestrictedUse firstCnabRestrictedUse = new CnabRestrictedUse(3);
+        Aservice aservice = new Aservice(new RegistrationNumber(1L), transaction);
+        Control control = Control.createTedSinglePayment(bankCode, new RecordType(3L));
 
         return new ASegmentBuilder(control, aservice, firstCnabRestrictedUse, payee, payment, information2, docPurpose,
                 tedPurpose, purpose, notice, occurrence)
@@ -107,17 +108,17 @@ public final class ASegment implements Segment {
         public ASegmentBuilder(Control control, Aservice service, CnabRestrictedUse cnabFirstRestrictedUse,
                                Payee receiver, Payment payment, Information2 information2, DocPurpose docPurpose,
                                TedPurpose tedPurpose, Purpose purpose, Notice notice, Occurrence occurrences) {
+            this.notice = notice;
+            this.purpose = purpose;
             this.control = control;
             this.service = service;
-            this.cnabFirstRestrictedUse = cnabFirstRestrictedUse;
-            this.receiver = receiver;
             this.payment = payment;
-            this.information2 = information2;
+            this.receiver = receiver;
             this.docPurpose = docPurpose;
             this.tedPurpose = tedPurpose;
-            this.purpose = purpose;
-            this.notice = notice;
             this.occurrences = occurrences;
+            this.information2 = information2;
+            this.cnabFirstRestrictedUse = cnabFirstRestrictedUse;
         }
 
         public ASegment build() throws ContentMoreThan240CharactersException {
