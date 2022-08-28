@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>br.com.ntcavalcante</groupId>
     <artifactId>CNAB240</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <description>
         This project is a lib for create a Cnab240 file in Java.
     </description>
@@ -32,7 +30,8 @@
         <connection>scm:git:git@github.com:netocavalcante/cnab240.git</connection>
         <developerConnection>scm:git:ssh://github.com:netocavalcante/cnab240.git</developerConnection>
         <url>https://github.com/netocavalcante/cnab240/tree/main</url>
-    </scm>
+      <tag>CNAB240-0.0.1</tag>
+  </scm>
 
     <dependencies>
         <dependency>
