@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.github.cnab240</groupId>
+    <groupId>br.com.ntcavalcante</groupId>
     <artifactId>CNAB240</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.1-SNAPSHOT</version>
     <description>
         This project is a lib for create a Cnab240 file in Java.
     </description>
@@ -139,6 +139,7 @@
         </plugins>
     </pluginManagement>
     </build>
+
 
     <distributionManagement>
         <snapshotRepository>
