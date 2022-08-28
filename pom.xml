@@ -4,7 +4,7 @@
 
     <groupId>br.com.ntcavalcante</groupId>
     <artifactId>CNAB240</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
     <description>
         This project is a lib for create a Cnab240 file in Java.
     </description>
