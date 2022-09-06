@@ -7,6 +7,14 @@ public final class Util {
     private Util() {
     }
 
+    public static <T> String formatFieldToBePrinted(T field, int size, int emptySpace) {
+        if (Objects.isNull(field)){
+            return "";
+        }
+
+        return formatFieldToBePrinted(" ", emptySpace) + formatFieldToBePrinted((Number)field, size);
+    }
+
     public static <T> String formatFieldToBePrinted(T field, int size) {
         if (Objects.isNull(field)){
             return "";

@@ -4,12 +4,12 @@
 
     <groupId>br.com.ntcavalcante</groupId>
     <artifactId>CNAB240</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 
     <name>cnab240</name>
 
     <description>
-        This project is a lib for create a Cnab240 file in Java.
+        This project is a Java lib to create a Cnab240 file.
     </description>
     <url>https://github.com/netocavalcante/cnab240</url>
 
@@ -130,7 +130,7 @@
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.7</version>
+                <version>1.6.10</version>
                 <extensions>true</extensions>
                 <configuration>
                     <serverId>ossrh</serverId>
