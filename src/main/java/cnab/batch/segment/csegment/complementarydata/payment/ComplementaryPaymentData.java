@@ -8,15 +8,15 @@ public class ComplementaryPaymentData {
     private final IrValue irValue;
     private final IssValue issValue;
     private final IOFValue iofValue;
-    private final OtherDeductions otherDeductions;
     private final OtherAdditions otherAdditions;
+    private final OtherDeductions otherDeductions;
 
     public ComplementaryPaymentData(ComplementaryPaymentDataBuilder complementaryPaymentDataBuilder) {
         this.irValue = complementaryPaymentDataBuilder.irValue;
         this.issValue = complementaryPaymentDataBuilder.issValue;
         this.iofValue = complementaryPaymentDataBuilder.iofValue;
-        this.otherDeductions = complementaryPaymentDataBuilder.otherDeductions;
         this.otherAdditions = complementaryPaymentDataBuilder.otherAdditions;
+        this.otherDeductions = complementaryPaymentDataBuilder.otherDeductions;
     }
 
     public static ComplementaryPaymentData createEmptyComplementaryData() {
@@ -47,8 +47,8 @@ public class ComplementaryPaymentData {
         private IrValue irValue;
         private IssValue issValue;
         private IOFValue iofValue;
-        private OtherDeductions otherDeductions;
         private OtherAdditions otherAdditions;
+        private OtherDeductions otherDeductions;
 
         public ComplementaryPaymentDataBuilder() {
         }
@@ -58,8 +58,8 @@ public class ComplementaryPaymentData {
             this.irValue = irValue;
             this.issValue = issValue;
             this.iofValue = iofValue;
-            this.otherDeductions = otherDeductions;
             this.otherAdditions = otherAdditions;
+            this.otherDeductions = otherDeductions;
         }
 
         public ComplementaryPaymentDataBuilder setIrValue(IrValue irValue) {

@@ -8,17 +8,14 @@ import cnab.commonsfileds.control.BankCode;
 import cnab.utils.Util;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-import java.util.StringJoiner;
+import java.util.*;
 
 public final class TED implements PaymentService {
     private final ASegment aSegment;
     private final BSegment bSegment;
     private final CSegment cSegment;
 
-    public TED(TEDBuilder tedBuilder) {
+    private TED(TEDBuilder tedBuilder) {
         this.aSegment = tedBuilder.aSegment;
         this.bSegment = tedBuilder.bSegment;
         this.cSegment = tedBuilder.cSegment;
@@ -40,15 +37,8 @@ public final class TED implements PaymentService {
 
     @Override
     public long getAmountOfSegments() {
-        Set<Segment> amountSegments = new HashSet<>();
-        amountSegments.add(getRegistrationNumberIfexist(aSegment));
-        amountSegments.add(getRegistrationNumberIfexist(bSegment));
-        amountSegments.add(getRegistrationNumberIfexist(cSegment));
+        Set<Segment> amountSegments = Set.of(aSegment,bSegment,cSegment);
         return amountSegments.stream().filter(Objects::nonNull).count();
-    }
-
-    private Segment getRegistrationNumberIfexist(Segment segment){
-        return Objects.nonNull(segment) ? segment : null ;
     }
 
     @Override
@@ -62,10 +52,10 @@ public final class TED implements PaymentService {
     }
 
     public static final class TEDBuilder {
+
         private final ASegment aSegment;
         private BSegment bSegment;
         private CSegment cSegment;
-
         public TEDBuilder(ASegment aSegment) {
             this.aSegment = aSegment;
         }
@@ -83,6 +73,10 @@ public final class TED implements PaymentService {
         public TED build() {
             return new TED(this);
         }
+
     }
 
+    private Segment getRegistrationNumberIfexist(Segment segment){
+        return Objects.nonNull(segment) ? segment : null ;
+    }
 }

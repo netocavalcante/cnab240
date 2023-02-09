@@ -27,6 +27,7 @@ public final class BatchTrailer {
     public BatchTrailer(Set<Service> segments, BankCode bankCode, ControlNumber controlNumber) {
         Long lineOfBatchHeaderAndTrailer = 2L;
         Long records = getCountOfServicesLines(segments) + lineOfBatchHeaderAndTrailer ;
+
         PaymentDTO paymentDTO = segments.stream().map(this::getCoinAndAmount)
                 .findFirst()
                 .orElse(new PaymentDTO(BigDecimal.ZERO, BigDecimal.ZERO));
@@ -39,11 +40,8 @@ public final class BatchTrailer {
 
         this.firstCnabRestrictedUse = new CnabRestrictedUse(9);
         this.secondCnabRestrictedUse = new CnabRestrictedUse(165);
-
         this.control = Control.createDefaultBatchTrailer(bankCode, controlNumber);
-
         this.occurrences = new Occurrence("");
-
         this.debitNoticeNumber = new DebitNoticeNumber(0L);
     }
 
@@ -55,13 +53,8 @@ public final class BatchTrailer {
     }
 
     private PaymentDTO getCoinAndAmount(Service service) {
-       if (service instanceof PaymentService) {
-           BigDecimal paymentAmount = ((PaymentService) service).getPaymentAmount();
-           BigDecimal totalOfCoin = ((PaymentService) service).getTotalOfCoin();
-           return new PaymentDTO(paymentAmount, totalOfCoin);
-       }
-
-        return null;
+        return service instanceof PaymentService paymentService ?
+               new PaymentDTO(paymentService.getPaymentAmount(), paymentService.getTotalOfCoin()) : null;
     }
 
     @Override

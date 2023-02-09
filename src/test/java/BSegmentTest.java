@@ -15,7 +15,7 @@ class BSegmentTest {
         ContentMoreThan240CharactersException exception = assertThrows(ContentMoreThan240CharactersException.class,
                 BSegmentTestFactory::createInvalidBSegmentInformation10LongerThanPossible);
 
-        assertThat(exception.getMessage(), containsString("The BSegment must have less than 240 charactes"));
+        assertThat(exception.getMessage(), containsString("The " + BSegment.class.getName() + " must have less than 240 charactes"));
     }
 
     @Test

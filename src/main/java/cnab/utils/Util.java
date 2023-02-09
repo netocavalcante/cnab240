@@ -4,12 +4,15 @@ import java.util.Objects;
 
 public final class Util {
 
+    private static final String EMPTY_STRING = "";
+    private static final String ZERO_AS_STRING = "0";
+
     private Util() {
     }
 
     public static <T> String formatFieldToBePrinted(T field, int size, int emptySpace) {
         if (Objects.isNull(field)){
-            return "";
+            return EMPTY_STRING;
         }
 
         return formatFieldToBePrinted(" ", emptySpace) + formatFieldToBePrinted((Number)field, size);
@@ -17,12 +20,13 @@ public final class Util {
 
     public static <T> String formatFieldToBePrinted(T field, int size) {
         if (Objects.isNull(field)){
-            return "";
+            return EMPTY_STRING;
         }
 
-        if (field instanceof String) {
-            return formatFieldToBePrinted((String)field, size);
+        if (field instanceof String fieldValue) {
+            return formatFieldToBePrinted(fieldValue, size);
         }
+
         return formatFieldToBePrinted((Number)field, size);
     }
 
@@ -42,15 +46,15 @@ public final class Util {
         }
 
         if (field.equals(0)) {
-            return "0".repeat(size);
+            return ZERO_AS_STRING.repeat(size);
         }
 
-        fieldString = fieldString.replace(".","");
+        fieldString = fieldString.replace(".",EMPTY_STRING);
 
-        return  "0".repeat(size - fieldString.length()) + fieldString;
+        return  ZERO_AS_STRING.repeat(size - fieldString.length()) + fieldString;
     }
 
     public static <T> String getValueIfExist(T propertie ) {
-        return Objects.isNull(propertie) ? "" : propertie.toString();
+        return Objects.isNull(propertie) ? EMPTY_STRING : propertie.toString();
     }
 }

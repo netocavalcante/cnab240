@@ -1,5 +1,6 @@
 package cnab.batch.segment.bsegment;
 
+import cnab.batch.segment.SegmentBuilder;
 import cnab.batch.segment.bsegment.complementarydata.ComplementaryData;
 import cnab.batch.segment.bsegment.payeeenrollment.PayeeEnrollment;
 import cnab.batch.segment.commonsfields.RegistrationNumber;
@@ -10,10 +11,6 @@ import cnab.commonsfileds.control.Control;
 import cnab.commonsfileds.control.RecordType;
 import cnab.exceptions.ContentMoreThan240CharactersException;
 import cnab.utils.Util;
-
-import java.util.Objects;
-
-import static cnab.utils.validator.CNABConstraintValidator.validateLineMaxLength;
 
 public final class BSegment implements cnab.batch.segment.Segment {
     private final Control control;
@@ -37,16 +34,11 @@ public final class BSegment implements cnab.batch.segment.Segment {
     public static BSegment createSingleTedPayment(BankCode bankCode, PayeeIdentification payeeIdentification,
                                                   PayeeEnrollment payeeEnrollment, ComplementaryData complementaryData,
                                                   SIAPECode siapeCode, ISPBCode ispbCode) throws ContentMoreThan240CharactersException {
-        Control control = Control.createTedSinglePayment(bankCode, new RecordType(3L));
+        Control control = Control.createSinglePayment(bankCode, new RecordType(3L));
         Service service = new Service(new RegistrationNumber(2L), new Segment("B"));
 
         return new BSegmentBuilder(control, service, payeeIdentification, payeeEnrollment, complementaryData, siapeCode,
                 ispbCode).build();
-    }
-    @Override
-    public Long getRegistrationNumber(){
-        RegistrationNumber registrationNumber = this.service.getRegistrationNumber();
-        return Objects.nonNull(registrationNumber) ? registrationNumber.getField() : 0;
     }
 
     @Override
@@ -60,7 +52,7 @@ public final class BSegment implements cnab.batch.segment.Segment {
                 Util.getValueIfExist(ispbCode);
     }
 
-    public static final class BSegmentBuilder {
+    public static final class BSegmentBuilder  implements SegmentBuilder {
         private Control control;
         private Service service;
         private ISPBCode ispbCode;
@@ -117,13 +109,8 @@ public final class BSegment implements cnab.batch.segment.Segment {
         }
 
         public BSegment build() throws ContentMoreThan240CharactersException {
-            validate(getContentAsString());
-
+            validate(getContentAsString(), BSegment.class);
             return new BSegment(this);
-        }
-
-        private void validate(String contentAsString) throws ContentMoreThan240CharactersException {
-            validateLineMaxLength(contentAsString, "BSegment");
         }
 
         private String getContentAsString() {

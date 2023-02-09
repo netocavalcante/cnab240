@@ -45,7 +45,7 @@ public class BatchHeader {
         Information information = new Information(informationValue);
         CnabRestrictedUse firstCnabRestrictedUse = new CnabRestrictedUse(1);
         CnabRestrictedUse secondCnabRestrictedUse = new CnabRestrictedUse(6);
-        Control control = Control.createTedSinglePayment(bankCode, new RecordType(1L));
+        Control control = Control.createSinglePayment(bankCode, new RecordType(1L));
 
         return new BatchHeaderBuilder()
                 .setControl(control)

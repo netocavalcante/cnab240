@@ -3,17 +3,17 @@ package cnab.commonsfileds.account;
 import cnab.utils.Util;
 
 public class Account {
-    private final AccountNumber accountNumber;
-    private final AccountControlDigit accountControlDigit;
     private final BranchCode branchCode;
+    private final AccountNumber accountNumber;
     private final BranchControlDigit branchControlDigit;
+    private final AccountControlDigit accountControlDigit;
     private final BranchAccountControlDigit branchAccountControlDigit;
 
     public Account(AccountBuilder accountBuilder) {
-        this.accountNumber = accountBuilder.accountNumber;
-        this.accountControlDigit = accountBuilder.accountControlDigit;
         this.branchCode = accountBuilder.branchCode;
+        this.accountNumber = accountBuilder.accountNumber;
         this.branchControlDigit = accountBuilder.branchControlDigit;
+        this.accountControlDigit = accountBuilder.accountControlDigit;
         this.branchAccountControlDigit = accountBuilder.branchAccountControlDigit;
     }
 
@@ -27,20 +27,20 @@ public class Account {
     }
 
     public static final class AccountBuilder {
-        private AccountNumber accountNumber;
-        private AccountControlDigit accountControlDigit;
         private BranchCode branchCode;
+        private AccountNumber accountNumber;
         private BranchControlDigit branchControlDigit;
+        private AccountControlDigit accountControlDigit;
         private BranchAccountControlDigit branchAccountControlDigit;
 
         public AccountBuilder() {
         }
 
         public AccountBuilder(AccountNumber accountNumber, AccountControlDigit accountControlDigit, BranchCode branchCode, BranchControlDigit branchControlDigit, BranchAccountControlDigit branchAccountControlDigit) {
-            this.accountNumber = accountNumber;
-            this.accountControlDigit = accountControlDigit;
             this.branchCode = branchCode;
+            this.accountNumber = accountNumber;
             this.branchControlDigit = branchControlDigit;
+            this.accountControlDigit = accountControlDigit;
             this.branchAccountControlDigit = branchAccountControlDigit;
         }
 

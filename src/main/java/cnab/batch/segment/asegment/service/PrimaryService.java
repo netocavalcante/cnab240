@@ -6,11 +6,11 @@ import cnab.batch.segment.commonsfields.Segment;
 import cnab.batch.segment.commonsfields.service.Service;
 import cnab.utils.Util;
 
-public final class Aservice extends Service {
+public final class PrimaryService extends Service {
     private final Transaction transaction;
 
-    public Aservice(RegistrationNumber registrationNumber, Transaction transaction) {
-        super(registrationNumber, new Segment("A"));
+    public PrimaryService(RegistrationNumber registrationNumber, Transaction transaction, Segment segment) {
+        super(registrationNumber, segment);
         this.transaction = transaction;
     }
 

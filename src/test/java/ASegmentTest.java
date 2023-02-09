@@ -16,7 +16,7 @@ class ASegmentTest {
                 Assertions.assertThrows(ContentMoreThan240CharactersException.class, () ->
                ASegmentTestFactory.createInvalidASegmentWithNoticeWith100Characters(new BankCode(123L)));
 
-        assertThat(exception.getMessage(), containsString("The ASegment must have less than 240 charactes"));
+        assertThat(exception.getMessage(), containsString("The " + ASegment.class.getName() + " must have less than 240 charactes"));
     }
 
     @Test

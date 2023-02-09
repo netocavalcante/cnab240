@@ -17,7 +17,7 @@ public final class Control {
         return new ControlBuilder(bankCode, new ControlNumber(0L), new RecordType(0L)).build();
     }
 
-    public static Control createTedSinglePayment(BankCode bankCode, RecordType recordType){
+    public static Control createSinglePayment(BankCode bankCode, RecordType recordType){
         return new ControlBuilder(bankCode, new ControlNumber(1L), recordType).build();
     }
 

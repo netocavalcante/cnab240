@@ -5,16 +5,16 @@ import cnab.commonsfileds.account.Account;
 import cnab.utils.Util;
 
 public final class Payee {
-    private final CentralizedChamberCode centralizedChamberCode;
-    private final PayeeBankCode payerBankCode;
-    private final Account account;
     private final Name name;
+    private final Account account;
+    private final PayeeBankCode payerBankCode;
+    private final CentralizedChamberCode centralizedChamberCode;
 
     public Payee(PayeeBuilder payeeBuilder) {
-        this.centralizedChamberCode = payeeBuilder.centralClearingHouseCode;
-        this.payerBankCode = payeeBuilder.payerBankCode;
-        this.account = payeeBuilder.account;
         this.name = payeeBuilder.name;
+        this.account = payeeBuilder.account;
+        this.payerBankCode = payeeBuilder.payerBankCode;
+        this.centralizedChamberCode = payeeBuilder.centralClearingHouseCode;
     }
 
     @Override
@@ -26,17 +26,17 @@ public final class Payee {
     }
 
     public static final class PayeeBuilder {
-        private CentralizedChamberCode centralClearingHouseCode;
-        private PayeeBankCode payerBankCode;
-        private Account account;
         private Name name;
+        private Account account;
+        private PayeeBankCode payerBankCode;
+        private CentralizedChamberCode centralClearingHouseCode;
 
         public PayeeBuilder(CentralizedChamberCode centralClearingHouseCode, PayeeBankCode payerBankCode,
                             Account account, Name name) {
-            this.centralClearingHouseCode = centralClearingHouseCode;
-            this.payerBankCode = payerBankCode;
-            this.account = account;
             this.name = name;
+            this.account = account;
+            this.payerBankCode = payerBankCode;
+            this.centralClearingHouseCode = centralClearingHouseCode;
         }
 
         public PayeeBuilder() {

@@ -1,11 +1,12 @@
 package cnab.batch.segment.asegment;
 
 import cnab.batch.segment.Segment;
+import cnab.batch.segment.SegmentBuilder;
+import cnab.batch.segment.asegment.payment.Payment;
+import cnab.batch.segment.asegment.service.PrimaryService;
 import cnab.batch.segment.asegment.service.transaction.Transaction;
 import cnab.batch.segment.commonsfields.RegistrationNumber;
 import cnab.batch.segment.commonsfields.payee.Payee;
-import cnab.batch.segment.asegment.payment.Payment;
-import cnab.batch.segment.asegment.service.Aservice;
 import cnab.commonsfileds.Occurrence;
 import cnab.commonsfileds.control.BankCode;
 import cnab.commonsfileds.control.Control;
@@ -13,10 +14,8 @@ import cnab.commonsfileds.control.RecordType;
 import cnab.commonsfileds.restricteduse.CnabRestrictedUse;
 import cnab.exceptions.ContentMoreThan240CharactersException;
 import cnab.utils.Util;
-import cnab.utils.validator.CNABConstraintValidator;
 
 import java.math.BigDecimal;
-import java.util.Objects;
 
 public final class ASegment implements Segment {
     private final Notice notice;
@@ -24,9 +23,9 @@ public final class ASegment implements Segment {
     private final Purpose purpose;
     private final Control control;
     private final Payment payment;
-    private final Aservice service;
     private final DocPurpose docPurpose;
     private final TedPurpose tedPurpose;
+    private final PrimaryService service;
     private final Occurrence occurrences;
     private final Information2 information2;
     private final CnabRestrictedUse cnabFirstRestrictedUse;
@@ -51,11 +50,14 @@ public final class ASegment implements Segment {
                                                   Occurrence occurrence) throws ContentMoreThan240CharactersException {
 
         CnabRestrictedUse firstCnabRestrictedUse = new CnabRestrictedUse(3);
-        Aservice aservice = new Aservice(new RegistrationNumber(1L), transaction);
-        Control control = Control.createTedSinglePayment(bankCode, new RecordType(3L));
 
-        return new ASegmentBuilder(control, aservice, firstCnabRestrictedUse, payee, payment, information2, docPurpose,
-                tedPurpose, purpose, notice, occurrence)
+        PrimaryService primaryservice = new PrimaryService(new RegistrationNumber(1L), transaction,
+                new cnab.batch.segment.commonsfields.Segment("A"));
+
+        Control control = Control.createSinglePayment(bankCode, new RecordType(3L));
+
+        return new ASegmentBuilder(control, primaryservice, firstCnabRestrictedUse, payee, payment, information2,
+                docPurpose, tedPurpose, purpose, notice, occurrence)
                 .build();
     }
 
@@ -78,12 +80,6 @@ public final class ASegment implements Segment {
         return control.getBankCode();
     }
 
-    @Override
-    public Long getRegistrationNumber() {
-        RegistrationNumber registrationNumber = this.service.getRegistrationNumber();
-        return Objects.nonNull(registrationNumber) ? registrationNumber.getField() : 0;
-    }
-
     public BigDecimal getTotalOfCoin() {
         return payment.getTotalOfCoin();
     }
@@ -92,20 +88,23 @@ public final class ASegment implements Segment {
         return payment.getPaymentAmount();
     }
 
-    public static final class ASegmentBuilder {
-        private final Notice notice;
-        private final Payee receiver;
-        private final Purpose purpose;
-        private final Control control;
-        private final Payment payment;
-        private final Aservice service;
-        private final DocPurpose docPurpose;
-        private final TedPurpose tedPurpose;
-        private final Occurrence occurrences;
-        private final Information2 information2;
-        private final CnabRestrictedUse cnabFirstRestrictedUse;
+    public static final class ASegmentBuilder implements SegmentBuilder {
+        private Notice notice;
+        private Payee receiver;
+        private Purpose purpose;
+        private Control control;
+        private Payment payment;
+        private DocPurpose docPurpose;
+        private TedPurpose tedPurpose;
+        private PrimaryService service;
+        private Occurrence occurrences;
+        private Information2 information2;
+        private CnabRestrictedUse cnabFirstRestrictedUse;
 
-        public ASegmentBuilder(Control control, Aservice service, CnabRestrictedUse cnabFirstRestrictedUse,
+        public ASegmentBuilder() {
+        }
+
+        public ASegmentBuilder(Control control, PrimaryService service, CnabRestrictedUse cnabFirstRestrictedUse,
                                Payee receiver, Payment payment, Information2 information2, DocPurpose docPurpose,
                                TedPurpose tedPurpose, Purpose purpose, Notice notice, Occurrence occurrences) {
             this.notice = notice;
@@ -121,13 +120,64 @@ public final class ASegment implements Segment {
             this.cnabFirstRestrictedUse = cnabFirstRestrictedUse;
         }
 
-        public ASegment build() throws ContentMoreThan240CharactersException {
-            validate(getContetAsString());
-            return new ASegment(this);
+        public ASegmentBuilder setNotice(Notice notice) {
+            this.notice = notice;
+            return this;
         }
 
-        private void validate(String contet) throws ContentMoreThan240CharactersException {
-            CNABConstraintValidator.validateLineMaxLength(contet, "ASegment");
+        public ASegmentBuilder setReceiver(Payee receiver) {
+            this.receiver = receiver;
+            return this;
+        }
+
+        public ASegmentBuilder setPurpose(Purpose purpose) {
+            this.purpose = purpose;
+            return this;
+        }
+
+        public ASegmentBuilder setControl(Control control) {
+            this.control = control;
+            return this;
+        }
+
+        public ASegmentBuilder setPayment(Payment payment) {
+            this.payment = payment;
+            return this;
+        }
+
+        public ASegmentBuilder setService(PrimaryService service) {
+            this.service = service;
+            return this;
+        }
+
+        public ASegmentBuilder setDocPurpose(DocPurpose docPurpose) {
+            this.docPurpose = docPurpose;
+            return this;
+        }
+
+        public ASegmentBuilder setTedPurpose(TedPurpose tedPurpose) {
+            this.tedPurpose = tedPurpose;
+            return this;
+        }
+
+        public ASegmentBuilder setOccurrences(Occurrence occurrences) {
+            this.occurrences = occurrences;
+            return this;
+        }
+
+        public ASegmentBuilder setInformation2(Information2 information2) {
+            this.information2 = information2;
+            return this;
+        }
+
+        public ASegmentBuilder setCnabFirstRestrictedUse(CnabRestrictedUse cnabFirstRestrictedUse) {
+            this.cnabFirstRestrictedUse = cnabFirstRestrictedUse;
+            return this;
+        }
+
+        public ASegment build() throws ContentMoreThan240CharactersException {
+            validate(getContetAsString(), ASegment.class);
+            return new ASegment(this);
         }
 
         private String getContetAsString() {

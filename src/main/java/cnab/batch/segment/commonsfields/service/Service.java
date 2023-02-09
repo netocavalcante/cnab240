@@ -5,12 +5,12 @@ import cnab.batch.segment.commonsfields.Segment;
 import cnab.utils.Util;
 
 public class Service {
-    private final RegistrationNumber registrationNumber;
     private final Segment segment;
+    private final RegistrationNumber registrationNumber;
 
     public Service(RegistrationNumber registrationNumber, Segment segment) {
-        this.registrationNumber = registrationNumber;
         this.segment = segment;
+        this.registrationNumber = registrationNumber;
     }
 
     public RegistrationNumber getRegistrationNumber() {
